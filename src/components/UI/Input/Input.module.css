@@ -1,0 +1,11 @@
+.input {
+    margin: 1rem;
+    width: 10rem;
+    height: 2rem;
+    border: solid 1px rgb(211, 211, 211);
+}
+
+.invalid {
+  background-color: rgb(248, 183, 183);
+  border-color: rgb(248, 95, 95) !important;
+}

@@ -1,0 +1,15 @@
+.form {
+  margin: 0 auto;
+  width: 50vw;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.form button {
+  background-color: rgb(163, 205, 233);
+}
+
+.form button:hover {
+  background-color: rgb(187, 215, 235);
+}
