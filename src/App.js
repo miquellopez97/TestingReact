@@ -1,19 +1,27 @@
-import UserContext from './context/UserContext';
-import './App.css';
-import Login from './components/Login/Login';
+import UserContext from "./context/UserContext";
+import "./App.css";
+import Login from "./components/Login/Login";
+import Home from "./components/Home/Home";
+import Navbar from "./components/Navbar/Navbar";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
-
   const userData = {
     email: null,
-    pwd: null
-  }
+    pwd: null,
+  };
 
   return (
     <>
-      <UserContext.Provider value={userData}>
-        <Login/>
-      </UserContext.Provider>
+      <BrowserRouter>
+        <UserContext.Provider value={userData}>
+          <Navbar />
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Home />} />
+          </Routes>
+        </UserContext.Provider>
+      </BrowserRouter>
     </>
   );
 }

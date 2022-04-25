@@ -1,5 +1,6 @@
 import {useRef, useState} from 'react';
 import useHttp from '../../hooks/useHttp';
+import { useNavigate } from "react-router-dom";
 
 function Login() {
 
@@ -12,14 +13,18 @@ function Login() {
 
   const {isLoading, error, sendRequest: loginUser} = useHttp();
 
-  const submitHandler = (event) => {
+  const navigate = useNavigate();
+  const goToHome = () => {navigate('/')};
+
+  const submitHandler = async (event) => {
     event.preventDefault();
+
     const user = {
       mail: userEmailInput.current.value,
       password: userPwdInput.current.value,
     }
 
-    loginUser(
+    const response = await loginUser(
       {
         url: 'https://daw-m07-uf4-pr01.herokuapp.com/api/v1/auth/login',
         method: 'post',
@@ -28,6 +33,12 @@ function Login() {
 
       userLoged
     );
+
+    //Falta catch de como ha ido la peticion
+
+    if(response === undefined){
+      goToHome();
+    }
   }
 
   let content = '';
