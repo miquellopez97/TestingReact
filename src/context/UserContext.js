@@ -4,6 +4,7 @@ const UserContext = createContext({
   userId: 0,
   token: "",
   getToken: () => {},
+  setToken: () => {},
 });
 
 export default UserContext;
@@ -30,6 +31,7 @@ export function UserContextProvider(props) {
     userId,
     token,
     getToken,
+    setToken
   };
 
   return (

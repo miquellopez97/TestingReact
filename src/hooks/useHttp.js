@@ -23,7 +23,7 @@ const useHttp = () => {
 
       await wait(2000);
 
-      manageData(data.data);
+      manageData(data);
     } catch(err) {
       setError(err.message || 'Something went wrong!');
     }
