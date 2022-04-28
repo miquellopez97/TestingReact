@@ -1,6 +1,7 @@
-import {useState} from "react";
+import {useState, useContext} from "react";
 import useHttp from "../../hooks/useHttp";
 import Card from "./Detail/Card";
+import userData from "../../context/UserContext";
 
 function Home() {
   const {isLoading, error, sendRequest: hotelsList} = useHttp();
@@ -10,14 +11,16 @@ function Home() {
     setContent(data.hotels)
   }
 
-  const response = hotelsList(
-      {
-          url: 'https://daw-m07-uf4-pr01.herokuapp.com/api/v1/hotels',
-          method: 'get'
-      },
+  const actualUser = useContext(userData);
 
-      updateContent
-  );
+  // const response = hotelsList(
+  //     {
+  //         url: 'https://daw-m07-uf4-pr01.herokuapp.com/api/v1/hotels',
+  //         method: 'get'
+  //     },
+
+  //     updateContent
+  // );
 
   const fakeData =[
     {
@@ -61,12 +64,13 @@ function Home() {
             name={el.name} 
             city={el.city} 
             country={el.country} 
-            stars={el.stars} 
+            nstar={el.stars} 
             address={el.address} 
             key={el._id}
           /> 
         )}
       </ul>
+      <p>El user actual es: {actualUser.userId}</p>
     </>
   );
 }
