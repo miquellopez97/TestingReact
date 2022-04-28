@@ -1,28 +1,30 @@
-import {useState, useContext} from "react";
+import { useState, useContext, useEffect } from "react";
 import useHttp from "../../hooks/useHttp";
 import Card from "./Detail/Card";
 import userData from "../../context/UserContext";
 
 function Home() {
-  const {isLoading, error, sendRequest: hotelsList} = useHttp();
+  const { isLoading, error, sendRequest: hotelsList } = useHttp();
   const [content, setContent] = useState(null);
 
   function updateContent(data) {
-    setContent(data.hotels)
+    setContent(data.body)
   }
 
   const actualUser = useContext(userData);
 
-  // const response = hotelsList(
-  //     {
-  //         url: 'https://daw-m07-uf4-pr01.herokuapp.com/api/v1/hotels',
-  //         method: 'get'
-  //     },
+  useEffect(() => {
+    hotelsList(
+      {
+        url: 'https://daw-m07-uf4-pr01.herokuapp.com/api/v1/hotels',
+        method: 'get'
+      },
+  
+      updateContent
+    );
+  }, [])
 
-  //     updateContent
-  // );
-
-  const fakeData =[
+  const fakeData = [
     {
       _id: "6249b42d701c57de34f8b2a5",
       __v: 0,
@@ -59,15 +61,15 @@ function Home() {
     <>
       <h1>Home</h1>
       <ul>
-        {fakeData.map((el) => 
-          <Card 
-            name={el.name} 
-            city={el.city} 
-            country={el.country} 
-            nstar={el.stars} 
-            address={el.address} 
+        {content.map((el) =>
+          <Card
+            name={el.name}
+            city={el.city}
+            country={el.country}
+            nstar={el.stars}
+            address={el.address}
             key={el._id}
-          /> 
+          />
         )}
       </ul>
       <p>El user actual es: {actualUser.userId}</p>
