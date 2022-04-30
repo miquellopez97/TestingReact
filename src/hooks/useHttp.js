@@ -23,6 +23,8 @@ const useHttp = () => {
 
       await wait(2000);
 
+      console.log(data);
+
       manageData(data);
     } catch(err) {
       setError(err.message || 'Something went wrong!');
