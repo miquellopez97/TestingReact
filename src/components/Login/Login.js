@@ -1,6 +1,7 @@
 import {useRef, useState} from 'react';
 import useHttp from '../../hooks/useHttp';
 import { useNavigate } from "react-router-dom";
+import React from "react";
 
 function Login() {
 
@@ -9,7 +10,9 @@ function Login() {
   const userEmailInput = useRef();
   const userPwdInput = useRef();
 
-  const userLoged = () => setIsLoged(true);
+  const userLoged = () => {
+    setIsLoged(true);
+  };
 
   const {isLoading, error, sendRequest: loginUser} = useHttp();
 
@@ -36,7 +39,7 @@ function Login() {
 
     //Falta catch de como ha ido la peticion
 
-    if(response === undefined){
+    if(response){
       goToHome();
     }
   }
@@ -52,7 +55,11 @@ function Login() {
       <form onSubmit={submitHandler}>
         <input type="text" ref={userEmailInput}/>
         <input type="text" ref={userPwdInput}/>
-        <button type="submit">Login</button>
+        <div className="pt-1 mb-4">
+          <input 
+						type="submit" 
+						value="Submit"/>
+        </div>
       </form>
     </>
   )

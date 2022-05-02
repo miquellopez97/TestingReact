@@ -40,7 +40,7 @@ function Home() {
           />
         )}
       </ul>
-      <p>El user actual es: {actualUser.userId}</p>
+      <p>El user actual es: {actualUser.token}</p>
     </>
   );
 }

@@ -16,16 +16,20 @@ const useHttp = () => {
         },
         body: JSON.stringify(requestConfig.body),
       });
-      if (!response.ok) {
-        throw new Error('Request failed!');
-      }
-      const data = await response.json();
 
       await wait(2000);
 
-      console.log(data);
+      if (response.status !== 400) {
+        const data = await response.json();
+  
+        console.log(data.body);
+  
+        manageData(data);
+        return (true);
+      } else {
+        throw new Error('Status: ' + response.status);
+      }
 
-      manageData(data);
     } catch(err) {
       setError(err.message || 'Something went wrong!');
     }

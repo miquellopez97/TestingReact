@@ -17,8 +17,9 @@ function App() {
         <UserContext.Provider value={userData}>
           <Navbar />
           <Routes>
+          <Route path="/" element={<Login />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/" element={<Home />} />
+            <Route path="/home" element={<Home />} />
           </Routes>
         </UserContext.Provider>
       </BrowserRouter>
