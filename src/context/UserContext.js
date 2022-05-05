@@ -17,7 +17,6 @@ export function UserContextProvider(props) {
     const token = JSON.parse(sessionStorage.getItem("react-token"));
     console.log("t", token);
     if (token) {
-      //TODO: decrypt token
       setToken(token.token);
       setUserId(token.userId);
     }

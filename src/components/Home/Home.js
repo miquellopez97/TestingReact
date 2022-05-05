@@ -1,27 +1,23 @@
 import { useState, useContext, useEffect } from "react";
-import useHttp from "../../hooks/useHttp";
 import Card from "./Detail/Card";
 import userData from "../../context/UserContext";
+import axios from "axios";
+
 
 function Home() {
-  const { isLoading, error, sendRequest: hotelsList } = useHttp();
   const [content, setContent] = useState(null);
-
-  function updateContent(data) {
-    setContent(data.body)
-  }
 
   const actualUser = useContext(userData);
 
   useEffect(() => {
-    hotelsList(
-      {
-        url: 'https://daw-m07-uf4-pr01.herokuapp.com/api/v1/hotels',
-        method: 'get'
-      },
-  
-      updateContent
-    );
+    axios
+      .get('https://daw-m07-uf4-pr01.herokuapp.com/api/v1/hotels')
+      .then(res => {
+        setContent(res.data.body);
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }, [])
 
   return (
@@ -40,7 +36,7 @@ function Home() {
           />
         )}
       </ul>
-      <p>El user actual es: {actualUser.token}</p>
+      <p>El user actual es: {actualUser.getToken}</p>
     </>
   );
 }

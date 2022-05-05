@@ -6,15 +6,10 @@ import Navbar from "./components/Navbar/Navbar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
-  const userData = {
-    email: null,
-    pwd: null,
-  };
-
   return (
     <>
       <BrowserRouter>
-        <UserContext.Provider value={userData}>
+        <UserContext.Provider value={UserContext}>
           <Navbar />
           <Routes>
           <Route path="/" element={<Login />} />
